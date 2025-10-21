@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "title": "PUBG Mobile",
+    "coverPhoto": "https://i.ibb.co/spNmxJ7t/pubg.jpg",
+    "category": "Battle Royale",
+    "downloadLink": "https://www.pubgmobile.com/",
+    "description": "PUBG Mobile is a fast-paced battle royale where 100 players fight for survival using strategy and skill.",
+    "ratings": "4.5",
+    "developer": "Krafton"
+  },
+  {
+    "id": "2",
+    "title": "Call of Duty: Mobile",
+    "coverPhoto": "https://i.ibb.co/JRj66YXX/Call-of-Duty.jpg",
+    "category": "FPS",
+    "downloadLink": "https://www.callofduty.com/mobile",
+    "description": "A thrilling first-person shooter experience with iconic maps and weapons from the COD franchise.",
+    "ratings": "4.6",
+    "developer": "Activision"
+  },
+  {
+    "id": "3",
+    "title": "Genshin Impact",
+    "coverPhoto": "https://i.ibb.co/SDJc7SRv/Genshin-Impact.jpg",
+    "category": "Adventure RPG",
+    "downloadLink": "https://genshin.hoyoverse.com/",
+    "description": "Open-world action RPG featuring elemental magic, beautiful landscapes, and anime-style storytelling.",
+    "ratings": "4.8",
+    "developer": "HoYoverse"
+  },
+  {
+    "id": "4",
+    "title": "Clash of Clans",
+    "coverPhoto": "https://i.ibb.co.com/SD4g0Mpg/Clash-of-Clans.jpg",
+    "category": "Strategy",
+    "downloadLink": "https://supercell.com/en/games/clashofclans/",
+    "description": "Build your village, raise a clan, and compete in epic Clan Wars in this strategic multiplayer game.",
+    "ratings": "4.4",
+    "developer": "Supercell"
+  },
+  {
+    "id": "5",
+    "title": "Valorant",
+    "coverPhoto": "https://i.ibb.co.com/jk0V6PPt/Valorant.jpg",
+    "category": "Tactical FPS",
+    "downloadLink": "https://playvalorant.com/",
+    "description": "A competitive 5v5 tactical shooter that blends precise gunplay with unique character abilities.",
+    "ratings": "4.7",
+    "developer": "Riot Games"
+  },
+  {
+    "id": "6",
+    "title": "Minecraft",
+    "coverPhoto": "https://i.ibb.co/p6NwgrhF/Minecraft.jpg",
+    "category": "Sandbox",
+    "downloadLink": "https://www.minecraft.net/",
+    "description": "Explore, build, and survive in a blocky open world full of endless creativity and adventure.",
+    "ratings": "4.9",
+    "developer": "Mojang Studios"
+  },
+  {
+    "id": "7",
+    "title": "Fortnite",
+    "coverPhoto": "https://i.ibb.co.com/WNNFzjFv/Fortnite.jpg",
+    "category": "Battle Royale",
+    "downloadLink": "https://www.epicgames.com/fortnite/",
+    "description": "Fast-paced battle royale with vibrant graphics, building mechanics, and exciting live events.",
+    "ratings": "4.6",
+    "developer": "Epic Games"
+  },
+  {
+    "id": "8",
+    "title": "Apex Legends",
+    "coverPhoto": "https://i.ibb.co.com/prypH5Zm/Apex-Legends.jpg",
+    "category": "Battle Royale",
+    "downloadLink": "https://www.ea.com/games/apex-legends",
+    "description": "A squad-based hero shooter set in the Titanfall universe, featuring unique characters and abilities.",
+    "ratings": "4.5",
+    "developer": "Respawn Entertainment"
+  },
+  {
+    "id": "9",
+    "title": "Among Us",
+    "coverPhoto": "https://i.ibb.co.com/2YtTH4qk/Among-Us.jpg",
+    "category": "Party Game",
+    "downloadLink": "https://innersloth.com/gameAmongUs.php",
+    "description": "Find the impostor among your crewmates in this fun and chaotic online multiplayer game.",
+    "ratings": "4.3",
+    "developer": "Innersloth"
+  },
+  {
+    "id": "10",
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "coverPhoto": "https://i.ibb.co/z8kN1Sk/zelda.jpg",
+    "category": "Adventure",
+    "downloadLink": "https://i.ibb.co.com/1p6dHpM/The-Legend.jpg",
+    "description": "An open-world adventure game that redefines exploration and freedom in the fantasy world of Hyrule.",
+    "ratings": "4.9",
+    "developer": "Nintendo"
+  }
+]
