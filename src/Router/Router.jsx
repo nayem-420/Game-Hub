@@ -1,11 +1,9 @@
-import React from 'react';
+import { createBrowserRouter } from "react-router";
+import Footer from "../Components/Footer";
 
-const Router = () => {
-    return (
-        <div>
-            <h1>Router</h1>
-        </div>
-    );
-};
-
-export default Router;
+export const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Footer />
+    },
+]);
