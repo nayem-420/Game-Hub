@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router";
-// import logo from "/src/assets/logo.png";
 
 const Navbar = () => {
+  const navLinkStyle = ({ isActive }) => {
+    return isActive
+      ? "border-b-2 border-indigo-500 pb-1"
+      : "hover:text-indigo-500 pb-1";
+  }
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm">
@@ -29,20 +33,44 @@ const Navbar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              <NavLink to={"/"}>Home</NavLink>
-              <NavLink to={"/"}>Games</NavLink>
-              <NavLink to={"/"}>Home</NavLink>
+              <li>
+                <NavLink className={navLinkStyle} to="/">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className={navLinkStyle} to="/games">
+                  Games
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className={navLinkStyle} to="/about">
+                  About
+                </NavLink>
+              </li>
             </ul>
           </div>
-          <a class="btn bg-indigo-500 hover:bg-fuchsia-500">
+          <NavLink to="/" className="btn bg-indigo-500 hover:bg-fuchsia-500">
             <h1 className="text-lg font-semibold text-white">GameHub</h1>
-          </a>
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-5">
-            <NavLink to={"/"}>Home</NavLink>
-            <NavLink to={"/"}>Games</NavLink>
-            <NavLink to={"/"}>Home</NavLink>
+            <li>
+              <NavLink className={navLinkStyle} to={"/"}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={navLinkStyle} to={"/games"}>
+                Games
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={navLinkStyle} to={"/about"}>
+                About
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
