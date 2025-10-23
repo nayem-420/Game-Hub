@@ -4,6 +4,7 @@ import { NavLink, useLoaderData } from "react-router";
 import GameCard from "../Components/GameCard";
 import Newsletter from "../Components/Newsletter";
 import { motion } from "framer-motion";
+import About from "./About";
 
 const Home = () => {
   const games = useLoaderData();
@@ -63,6 +64,15 @@ const Home = () => {
         viewport={{ once: true }}
       >
         <Newsletter />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <About />
       </motion.div>
     </div>
   );
