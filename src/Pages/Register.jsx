@@ -1,41 +1,74 @@
-import React, { useState } from "react";
+import React, {  useContext, useState } from "react";
 import banner1 from "../assets/banner-2.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { IoEyeOutline } from "react-icons/io5";
 import { LuEyeClosed } from "react-icons/lu";
 import { FaRegFolderOpen } from "react-icons/fa";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
+import { AuthContext } from "../Context/AuthContext";
 
 const Register = () => {
+
+    const {
+      createUserWithEmailAndPasswordfunc,
+      updateProfilefunc,
+        sendEmailVarificationfunc,signOutWithUserFunc,
+      setUser,
+    } = useContext(AuthContext);
+
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
+
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
+    const displayName = form.name.value;
     const email = form.email.value;
-    const photoURL = form.photoURL.value;
-    const password = form.password.value;
-      console.log("Registration Compleat", name, email, photoURL, password);
-      const passwordRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-
-      if (!passwordRegex.test(password)) {
-        toast.error(
-          "Password must contain at least 6 characters, one uppercase, one lowercase, one number, and one special character."
-        );
-        return;
-      }
+    const photoURL = form.photoURL?.value;
+      const password = form.password.value;
       
-      createUserWithEmailAndPassword(auth, email, password)
-          .then(res => {
-              console.log(res);
-              toast.success("Registration Done");
-          }).catch(e => {
-              console.log(e);
-              toast.error(e.message);
+      
+
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password must contain at least 6 characters, one uppercase, one lowercase, one number, and one special character."
+      );
+      return;
+    }
+
+    createUserWithEmailAndPasswordfunc(email,password)
+      .then((res) => {
+        updateProfilefunc(
+          displayName,
+          photoURL,
+        )
+          .then(() => {
+            sendEmailVarificationfunc()
+              .then((res) => {
+                  signOutWithUserFunc().then(() => {
+                      toast.success("signOut Successfully");
+                  })
+                  setUser(null);
+                  navigate('/login')
+              })
+              .catch((e) => {
+                toast.error(e.message);
+              });
+          })
+          .catch((e) => {
+            toast.error(e.message);
+          });
+        toast.success("Registration Done");
       })
+      .catch((e) => {
+        toast.error(e.message);
+      });
   };
   return (
     <div
@@ -82,15 +115,13 @@ const Register = () => {
                   {show ? <IoEyeOutline /> : <LuEyeClosed />}
                 </span>
                 <label className="label">Photo</label>
-                <div className="flex items-center gap-2 border border-gray-300 rounded-md px-1 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400">
-                  <FaRegFolderOpen className="text-gray-500 text-lg" />
-                  <input
-                    type="file"
-                    name="photoURL"
-                    id="photoURL"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="photo"
+                  className="input placeholder-black/30 focus:outline-1 focus:ring-2"
+                  placeholder="Choose Photo"
+                  required
+                />
                 <p className="text-xs text-gray-500 mt-1">
                   Select your profile picture
                 </p>

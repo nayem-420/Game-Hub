@@ -8,7 +8,6 @@ import About from "./About";
 
 const Home = () => {
   const games = useLoaderData();
-  console.log(games);
   const popularGames = [...games]
     .sort((a, b) => parseFloat(b.ratings) - parseFloat(a.ratings))
     .slice(0, 3);

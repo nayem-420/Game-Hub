@@ -1,17 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import banner1 from "../assets/banner-2.png";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { toast } from "react-toastify";
 import { IoEyeOutline } from "react-icons/io5";
 import { LuEyeClosed } from "react-icons/lu";
 import { auth } from "../firebase/firebase.config";
+import { AuthContext } from "../Context/AuthContext";
 
-
-const googleProvider = new GoogleAuthProvider();
 const Login = () => {
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+    const {
+      signInWithEmailAndPasswordfunc,
+      signInWithGooglefunc,
+      signInWithGiHubfunc,
+      signOutWithUserFunc,
+      sendPasswordResetEmailfunc,
+      user,
+      setUser,
+    } = useContext(AuthContext);
+
+
   const [show, setShow] = useState(false);
+  //   const [email, setEmail] = useState(null);
+  const emailRef = useRef(null);
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email?.value;
@@ -26,9 +46,12 @@ const Login = () => {
       return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPasswordfunc(email, password)
       .then((res) => {
-        console.log(res);
+        if (!res.user?.emailVerified) {
+          toast.error("Email Not verified");
+          return;
+        }
         setUser(res.user);
         toast.success("Login Successfully");
       })
@@ -36,30 +59,47 @@ const Login = () => {
         toast.error(e.message);
       });
 
-      
-
-    console.log("Login done", { user });
-    };
-    const handleLogout = () => {
-      signOut(auth)
-        .then(() => {
-            toast.success("signOut Successfully");
-            setUser(null);
-        })
-        .catch((e) => {
-          toast.error(e.message);
-        });
-    };
-    const handleGoogleLogin = () => {
-        signInWithPopup(auth, googleProvider)
+  };
+  const handleLogout = () => {
+    signOutWithUserFunc()
+      .then(() => {
+        toast.success("signOut Successfully");
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+  const handleGoogleLogin = () => {
+    signInWithGooglefunc()
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Login Successfully");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+  const handleGitHubSignIn = () => {
+    signInWithGiHubfunc()
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Successfully Login with GitHub");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+    const handleForgetPassword = () => {
+        const email = emailRef.current.value;
+        sendPasswordResetEmailfunc( email)
           .then((res) => {
-            setUser(res.user);
-            toast.success("Login Successfully");
+            toast.success("password reset done");
           })
           .catch((e) => {
             toast.error(e.message);
           });
-    }
+  };
   return (
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
@@ -93,6 +133,9 @@ const Login = () => {
                   <input
                     type="email"
                     name="email"
+                    // value={email}
+                    // onChange={(e) => setEmail(e.target.value)}
+                    ref={emailRef}
                     className="input placeholder-black/30 focus:outline-1 focus:ring-2 "
                     placeholder="Email"
                   />
@@ -122,7 +165,13 @@ const Login = () => {
                       ,
                     </div>
                     <br />
-                    <a className="link link-hover">Forgot password?</a>
+                    <button
+                      onClick={handleForgetPassword}
+                      className="link link-hover"
+                      type="button"
+                    >
+                      Forgot password?
+                    </button>
                   </div>
                   <button className="btn bg-red-700 text-white mt-4">
                     Login
@@ -135,9 +184,10 @@ const Login = () => {
               <span className="text-sm text-black ">or</span>
               <div className="h-px w-16 bg-black/30"></div>
             </div>
-                      <button
-                          onClick={handleGoogleLogin}
-                          className="btn bg-white text-black border-[#e5e5e5]">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn bg-white text-black border-[#e5e5e5]"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -167,7 +217,10 @@ const Login = () => {
               </svg>
               Login with Google
             </button>
-            <button className="btn bg-black text-white border-black">
+            <button
+              onClick={handleGitHubSignIn}
+              className="btn bg-black text-white border-black"
+            >
               <svg
                 aria-label="GitHub logo"
                 width="16"

@@ -8,6 +8,7 @@ import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import ErrorLayOuts from "../LayOuts/ErrorLayOuts";
 import MyProfile from "../Pages/MyProfile";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/games",
-        element: <Games></Games>,
+        element: <PrivateRoute><Games></Games></PrivateRoute>,
         loader: () => fetch("GameData.json").then((res) => res.json()),
       },
       {
