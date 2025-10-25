@@ -11,6 +11,7 @@ import c7 from "../assets/company8.png";
 const About = () => {
   return (
     <div>
+      <title>Game-Hub | About</title>
       {/*communication */}
       <div>
         <div>

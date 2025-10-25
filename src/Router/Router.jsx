@@ -6,11 +6,14 @@ import Games from "../Pages/Games";
 import GameDetails from "../Pages/GameDetails";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
+import ErrorLayOuts from "../LayOuts/ErrorLayOuts";
+import MyProfile from "../Pages/MyProfile";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayOuts></MainLayOuts>,
+    errorElement: <ErrorLayOuts></ErrorLayOuts>,
     hydrateFallbackElement: <p>Loading...</p>,
     children: [
       {
@@ -36,12 +39,16 @@ export const router = createBrowserRouter([
         element: <About></About>,
       },
       {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
         path: "/register",
         element: <Register></Register>,
       },
       {
-        path: "/login",
-        element: <Login></Login>,
+        path: "/profile",
+        element: <MyProfile></MyProfile>,
       },
     ],
   },
